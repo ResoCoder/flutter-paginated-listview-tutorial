@@ -12,7 +12,7 @@ class _$ListItem extends ListItem {
   @override
   final int colorInt;
 
-  factory _$ListItem([void updates(ListItemBuilder b)]) =>
+  factory _$ListItem([void Function(ListItemBuilder) updates]) =>
       (new ListItemBuilder()..update(updates)).build();
 
   _$ListItem._({this.title, this.colorInt}) : super._() {
@@ -25,7 +25,7 @@ class _$ListItem extends ListItem {
   }
 
   @override
-  ListItem rebuild(void updates(ListItemBuilder b)) =>
+  ListItem rebuild(void Function(ListItemBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -84,7 +84,7 @@ class ListItemBuilder implements Builder<ListItem, ListItemBuilder> {
   }
 
   @override
-  void update(void updates(ListItemBuilder b)) {
+  void update(void Function(ListItemBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -96,4 +96,4 @@ class ListItemBuilder implements Builder<ListItem, ListItemBuilder> {
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new
+// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new

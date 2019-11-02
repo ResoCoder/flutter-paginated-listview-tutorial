@@ -8,21 +8,22 @@ class ListBloc extends Bloc<ListEvent, ListState> {
   ListBloc(this._dataSource);
 
   void getNextListPage() {
-    dispatch(FetchNextPage());
+    this.add(FetchNextPage());
   }
+
+  void dispose() => this.close();
 
   @override
   ListState get initialState => ListState.initial();
 
   @override
-  Stream<ListState> mapEventToState(
-      ListState currentState, ListEvent event) async* {
+  Stream<ListState> mapEventToState(ListEvent event) async* {
     if (event is FetchNextPage) {
       try {
         final nextPageItems = await _dataSource.getNextListPage();
-        yield ListState.success(currentState.listItems + nextPageItems);
+        yield ListState.success(state.listItems + nextPageItems);
       } on NoNextPageException catch (_) {
-        yield currentState.rebuild((b) => b..hasReachedEndOfResults = true);
+        yield state.rebuild((b) => b..hasReachedEndOfResults = true);
       }
     }
   }
